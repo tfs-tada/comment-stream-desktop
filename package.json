@@ -1,0 +1,22 @@
+{
+  "name": "chrome-ex-zoom-comment-stream",
+  "version": "0.0.1",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "build": "cd comment-window && npm run build && cd ../control-window && npm run build && cd ../",
+    "start": "electron .",
+    "run": "npm run build && npm run start"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.5.2"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "electron": "^31.0.2",
+    "express": "^4.19.2",
+    "express-sse-middleware": "^3.0.3"
+  }
+}

@@ -1,0 +1,19 @@
+@keyframes moveRightToLeft {
+  0% {
+    transform: translateX(100%);
+    visibility: visible;
+  }
+  100% {
+    transform: translateX(-100%);
+    visibility: hidden;
+  }
+}
+
+.myElement {
+  animation: moveRightToLeft 5s linear forwards;
+  font-size: xx-large;
+  color: #ffffff;
+  text-shadow: 2px 2px 1px #003366, -2px 2px 1px #003366, 2px -2px 1px #003366,
+    -2px -2px 1px #003366, 2px 0px 1px #003366, 0px 2px 1px #003366,
+    -2px 0px 1px #003366, 0px -2px 1px #003366;
+}
