@@ -12,6 +12,10 @@ import {
 export const App = () => {
   const [isIgnored, setIsIgnored] = useState(false);
   const [isAlwaysOnTop, setIsAlwaysOnTop] = useState(false);
+  const [isTransparent, setIsTransparent] = useState(false);
+  const handleClickExit = () => {
+    (window as any).electronAPI.sendExit();
+  }
   return (
     <Stack
       display="flex"
@@ -52,10 +56,10 @@ export const App = () => {
             <TableCell>背景色透明化</TableCell>
             <TableCell>
               <Switch
-                checked={isAlwaysOnTop}
+                checked={isTransparent}
                 onChange={() => {
-                  (window as any).electronAPI.sendTransparent(!isAlwaysOnTop);
-                  setIsAlwaysOnTop((isAlwaysOnTop) => !isAlwaysOnTop);
+                  (window as any).electronAPI.sendTransparent(!isTransparent);
+                  setIsTransparent((isTransparent) => !isTransparent);
                 }}
               />
             </TableCell>
@@ -75,7 +79,9 @@ export const App = () => {
           </TableRow>
         </TableBody>
       </Table>
-      <Button>ウインドウを閉じる</Button>
+      <Button variant="outlined" color="warning" onClick={handleClickExit}>
+        ウインドウを閉じる
+      </Button>
     </Stack>
   );
 };

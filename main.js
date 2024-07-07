@@ -84,8 +84,15 @@ const createWindows = () => {
   });
   ipcMain.on("transparent", (_, transparent) => {
     // commentWinにsendTransparentイベントを送信
-    commentWin.webContents.send("sendTransparent", transparent);
+    commentWin.webContents.send("main-transparent", transparent);
   });
+
+  // 終了ボタンを押されたらアプリを終了
+  ipcMain.on("exit", () => {
+    electronApp.quit();
+  });
+
+
 };
 
 electronApp.whenReady().then(() => {
