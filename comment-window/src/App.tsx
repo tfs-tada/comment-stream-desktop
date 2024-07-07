@@ -6,7 +6,6 @@ export const App = () => {
   const [comments, setComments] = useState<
     { comment: string; height: number }[]
   >([]);
-  const [isControlled, setIsControlled] = useState(true);
   useServerSendEvent("http://localhost:5100/events", (event) => {
     const c = JSON.parse(event.data).comment;
     setComments((comments) => [
@@ -15,19 +14,11 @@ export const App = () => {
     ]);
   });
 
+  const [isTransparent, setIsTransparent] = useState(false);
   useEffect(() => {
-    const changeControl = () => {
-      setIsControlled((isControlled) => !isControlled);
-      (window as any).electronAPI.sendIgnoreMouseEvents(true);
-    };
-    window.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") {
-        changeControl();
-      }
+    (window as any).electronAPI.onMainTransparent((transparent: boolean) => {
+      setIsTransparent(transparent);
     });
-    return () => {
-      window.removeEventListener("keydown", changeControl);
-    };
   }, []);
 
   return (
@@ -35,9 +26,9 @@ export const App = () => {
       style={{
         position: "relative",
         height: "100vh",
-        backgroundColor: isControlled
-          ? "rgba(100, 100, 255, 0.3)"
-          : "transparent",
+        backgroundColor: isTransparent
+          ? "transparent"
+          : "rgba(100, 100, 255, 0.2)",
         transition: "height 0.5s",
       }}
     >
